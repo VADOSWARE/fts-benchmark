@@ -1,0 +1,18 @@
+[info] importing driver from [./meilisearch.mjs]
+[info] finished initializing driver [meilisearch]
+[info] processing lines in [/home/mrman/code/work/supabase/pg-fts-benchmark/movies.ndjson.json]...
+[info] successfully processed [44946] lines
+[info] importing driver from [./meilisearch.mjs]
+[info] finished initializing driver [meilisearch]
+[info] processing lines in [/home/mrman/code/work/supabase/pg-fts-benchmark/search-phrases.ndjson.json]...
+| `meilisearch` | "super hero" | `56` | `4.82` | `0.0861` |
+| `meilisearch` | "superhero" | `14` | `4.39` | `0.313` |
+| `meilisearch` | "superman" | `41` | `3.45` | `0.0841` |
+| `meilisearch` | "suprman" | `29` | `2.69` | `0.0929` |
+| `meilisearch` | "love" | `812` | `12.4` | `0.0153` |
+| `meilisearch` | "world war" | `316` | `8.53` | `0.0270` |
+| `meilisearch` | "spy" | `47` | `3.57` | `0.0760` |
+| `meilisearch` | "romance" | `35` | `3.05` | `0.0871` |
+| `meilisearch` | "comedy" | `67` | `3.46` | `0.0516` |
+| `meilisearch` | "awakening" | `15` | `3.63` | `0.242` |
+[info] successfully processed [10] lines

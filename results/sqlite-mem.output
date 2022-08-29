@@ -1,0 +1,18 @@
+[info] using SQLite DB @ [./fts-sqlite-disk-db.sqlite]...
+[info] importing driver from [./sqlite-mem.mjs]
+[info] using SQLite DB @ [:memory:]
+[info] finished initializing driver [sqlite-mem]
+[info] ingesting lines in [/home/mrman/code/work/supabase/pg-fts-benchmark/movies.ndjson.json]...
+[info] ingesting lines in [/home/mrman/code/work/supabase/pg-fts-benchmark/search-phrases.ndjson.json]...
+[timing] phrase [super hero]: returned [20] results in 0.590835.ms
+[timing] phrase [superhero]: returned [67] results in 0.349986.ms
+[timing] phrase [superman]: returned [47] results in 0.351138.ms
+[timing] phrase [suprman]: returned [0] results in 0.07513.ms
+[timing] phrase [love]: returned [4691] results in 17.030276.ms
+[timing] phrase [world war]: returned [781] results in 2.770685.ms
+[timing] phrase [spy]: returned [241] results in 0.606127.ms
+[timing] phrase [romance]: returned [554] results in 1.383845.ms
+[timing] phrase [comedy]: returned [1220] results in 3.116755.ms
+[timing] phrase [awakening]: returned [63] results in 0.25198.ms
+ingest and query for sqlite memory happen *at the same time*, this is a no-op
+[info] SQLite DB stop is a no-op

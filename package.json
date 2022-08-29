@@ -1,0 +1,18 @@
+{
+  "name": "pg-fts-benchmark",
+  "version": "0.1.0",
+  "description": "Full text search benchmark for Postgres and other F/OSS search engines",
+  "engines": {
+    "node": ">=17.4.0"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.18.9",
+    "@opensearch-project/opensearch": "^2.0.0",
+    "async-wait-for-promise": "^1.2.0",
+    "better-sqlite3": "^7.6.2",
+    "meilisearch": "^0.27.0",
+    "papaparse": "^5.3.2",
+    "slonik": "^30.3.1",
+    "typesense": "^1.4.0"
+  }
+}

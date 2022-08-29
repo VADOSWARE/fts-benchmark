@@ -1,0 +1,20 @@
+[info] using SQLite DB @ [./fts-sqlite-disk-db.sqlite]...
+[info] importing driver from [./sqlite-disk.mjs]
+[info] using SQLite DB @ [./fts-sqlite-disk-db.sqlite]
+[info] finished initializing driver [sqlite-disk]
+[info] ingesting lines in [/home/mrman/code/work/supabase/pg-fts-benchmark/movies.ndjson.json]...
+[info] importing driver from [./sqlite-disk.mjs]
+[info] using SQLite DB @ [./fts-sqlite-disk-db.sqlite]
+[info] finished initializing driver [sqlite-disk]
+[info] ingesting lines in [/home/mrman/code/work/supabase/pg-fts-benchmark/search-phrases.ndjson.json]...
+[timing] phrase [super hero]: returned [20] results in 0.633051.ms
+[timing] phrase [superhero]: returned [67] results in 0.540679.ms
+[timing] phrase [superman]: returned [47] results in 0.460226.ms
+[timing] phrase [suprman]: returned [0] results in 0.124516.ms
+[timing] phrase [love]: returned [4691] results in 26.88778.ms
+[timing] phrase [world war]: returned [781] results in 5.13194.ms
+[timing] phrase [spy]: returned [241] results in 1.043932.ms
+[timing] phrase [romance]: returned [554] results in 2.00016.ms
+[timing] phrase [comedy]: returned [1220] results in 4.285304.ms
+[timing] phrase [awakening]: returned [63] results in 0.335899.ms
+[info] Plesae delete SQLite @ [./fts-sqlite-disk-db.sqlite] manually

@@ -1,0 +1,16 @@
+# Local dockerized engine data
+.data
+
+# Secrets
+secrets/*
+
+# Direnv
+/.env
+/.envrc
+
+# NodeJS
+node_modules
+/movies.csv
+/movies.ndjson.json
+/fts-sqlite-disk-db.sqlite
+/fts-sqlite-disk-db.sqlite-journal

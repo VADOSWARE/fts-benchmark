@@ -1,0 +1,18 @@
+[info] importing driver from [./pg.mjs]
+[info] finished initializing driver [pg]
+[info] processing lines in [/home/mrman/code/work/supabase/pg-fts-benchmark/movies.ndjson.json]...
+[info] successfully processed [44946] lines
+[info] importing driver from [./pg.mjs]
+[info] finished initializing driver [pg]
+[info] processing lines in [/home/mrman/code/work/supabase/pg-fts-benchmark/search-phrases.ndjson.json]...
+| `pg` | "super hero" | `34` | `3.68` | `0.108` |
+| `pg` | "superhero" | `86` | `1.59` | `0.0184` |
+| `pg` | "superman" | `47` | `1.24` | `0.0264` |
+| `pg` | "suprman" | `0` | `0.999` | `Infinity` |
+| `pg` | "love" | `5417` | `15.3` | `0.00282` |
+| `pg` | "world war" | `834` | `2.94` | `0.00352` |
+| `pg` | "spy" | `349` | `1.78` | `0.00510` |
+| `pg` | "romance" | `630` | `2.14` | `0.00339` |
+| `pg` | "comedy" | `1213` | `3.55` | `0.00292` |
+| `pg` | "awakening" | `210` | `1.93` | `0.00919` |
+[info] successfully processed [10] lines

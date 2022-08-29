@@ -1,0 +1,22 @@
+01327528fa3471bec4934b67bba3292593ce4a6c5d5e03c5ecc3f1f15876fc99
+[info] started docker container [fts-typesense]...
+[info] waiting for TCP connectivity to [fts-typesense]...
+2022-08-31T06:56:17Z INF [TCP] Checking the localhost:8108 ...
+[info] importing driver from [./typesense.mjs]
+[info] finished initializing driver [typesense]
+[info] ingesting lines in [/home/mrman/code/work/supabase/pg-fts-benchmark/movies.ndjson.json]...
+[info] importing driver from [./typesense.mjs]
+[info] finished initializing driver [typesense]
+[info] ingesting lines in [/home/mrman/code/work/supabase/pg-fts-benchmark/search-phrases.ndjson.json]...
+[timing] phrase [super hero]: returned [8] results in 11.896117.ms
+[timing] phrase [superhero]: returned [8] results in 4.079828.ms
+[timing] phrase [superman]: returned [28] results in 4.222797.ms
+[timing] phrase [suprman]: returned [28] results in 3.663458.ms
+[timing] phrase [love]: returned [745] results in 34.869289.ms
+[timing] phrase [world war]: returned [11] results in 2.438208.ms
+[timing] phrase [spy]: returned [47] results in 3.214292.ms
+[timing] phrase [romance]: returned [34] results in 2.48651.ms
+[timing] phrase [comedy]: returned [55] results in 3.314717.ms
+[timing] phrase [awakening]: returned [14] results in 2.889301.ms
+fts-typesense
+Error: No such container: fts-typesense

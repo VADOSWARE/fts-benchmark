@@ -1,0 +1,23 @@
+# Changelog
+All notable changes to this project will be documented in this file.
+
+## [0.1.0] - 2022-08-29
+
+### Bug Fixes
+
+- Local volume data dirs
+- Opensearch
+
+### Features
+
+- Working query
+
+### Miscellaneous Tasks
+
+- Initial commit, basic docs and Makefile skeleton
+- Add gitignore
+- Update gitignore
+- Update timing
+- Add LICENSE
+- Add changelog stuff
+

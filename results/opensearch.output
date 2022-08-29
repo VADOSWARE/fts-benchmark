@@ -1,0 +1,29 @@
+fts-opensearch
+9455e8276b7388cb58884cd7817330a611f9094c504d93c08cd59f615441e95a
+[info] started docker container [fts-opensearch]...
+[info] waiting for TCP connectivity to [fts-opensearch]...
+2022-08-31T06:59:37Z INF [TCP] Checking the localhost:9200 ...
+[info] importing driver from [./opensearch.mjs]
+[info] finished initializing driver [opensearch]
+[info] ingesting lines in [/home/mrman/code/work/supabase/pg-fts-benchmark/movies.ndjson.json]...
+[error] successfully wrote batch of [20000] documents to ES
+[error] successfully wrote batch of [20000] documents to ES
+[error] successfully wrote batch of [20000] documents to ES
+[error] successfully wrote batch of [20000] documents to ES
+[error] successfully wrote batch of [9884] documents to ES
+[info] importing driver from [./opensearch.mjs]
+[info] finished initializing driver [opensearch]
+[info] ingesting lines in [/home/mrman/code/work/supabase/pg-fts-benchmark/search-phrases.ndjson.json]...
+[timing] phrase [super hero]: returned [431] results in 96.915658.ms
+[timing] phrase [superhero]: returned [45] results in 12.583994.ms
+[timing] phrase [superman]: returned [25] results in 10.57763.ms
+[timing] phrase [suprman]: returned [0] results in 7.280828.ms
+[timing] phrase [love]: returned [3036] results in 133.216874.ms
+[timing] phrase [world war]: returned [3805] results in 172.439469.ms
+[timing] phrase [spy]: returned [168] results in 15.957199.ms
+[timing] phrase [romance]: returned [383] results in 25.489779.ms
+[timing] phrase [comedy]: returned [756] results in 38.907331.ms
+[timing] phrase [awakening]: returned [32] results in 9.015631.ms
+fts-opensearch
+Error: No such container: fts-opensearch
+fts-opensearch
