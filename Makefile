@@ -135,7 +135,7 @@ release-minor:
 	$(MAKE) -s --no-print-directory changelog
 	$(GIT) commit -am "release: v`$(MAKE) -s --no-print-directory print-version`"
 	$(GIT) tag "v`$(MAKE) -s --no-print-directory print-version`"
-#	$(GIT) push --all
+	$(GIT) push --all
 
 release-patch:
 	$(PNPM) version patch --no-git-tag-version
