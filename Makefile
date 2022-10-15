@@ -215,7 +215,7 @@ query-meilisearch:
 	@OP=query \
 	TIMING=true \
 	QUERY_INPUT_PATH=$(SEARCH_PHRASES_NDJSON_PATH) \
-	MEILI_HOST=http://$(MEILI_HOST):$(MEILI_PORT) \
+	MEILI_URL=http://$(MEILI_HOST):$(MEILI_PORT) \
 	MEILI_API_KEY=$(MEILI_MASTER_KEY) \
 	$(NODE) "src/driver/index.mjs"
 
