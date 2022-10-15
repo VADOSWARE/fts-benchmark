@@ -93,7 +93,7 @@ movies.csv: check-dep-gunzip
 movies.ndjson.json: check-dep-gunzip movies.csv
 	@if [ ! -f "$(DATA_MOVIES_NDJSON_PATH)" ]; then \
 		echo -e "[info] converting [$(DATA_MOVIES_CSV_PATH)] to [$(DATA_MOVIES_NDJSON_PATH)]..."; \
-		INPUT_CSV_PATH=$(DATA_MOVIES_CSV_PATH) DATA_MOVIES_NDJSON_PATH=$(DATA_MOVIES_NDJSON_PATH) $(NODE) src/util/csv2ndjson.mjs; \
+		INPUT_CSV_PATH=$(DATA_MOVIES_CSV_PATH) OUTPUT_NDJSON_PATH=$(DATA_MOVIES_NDJSON_PATH) $(NODE) src/util/csv2ndjson.mjs; \
 	fi
 
 setup:
