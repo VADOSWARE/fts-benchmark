@@ -30,13 +30,20 @@ To run the tests, please ensure you have the following installed on your machine
 
 ## Quickstart
 
-To set up testing data and run the benchmark:
+To set up testing data and **run the full benchmark with *all* FTS engines**:
 
 ```console
-make
+make # equivalent to `make setup run-all`
 ```
 
-To install dependencies:
+To run only a single benchmark (in this case, with Postgres FTS):
+
+```console
+FTS_ENGINE=pg make setup run
+```
+(`FTS_ENGINE = 'pg' | 'meilisearch' | 'typesense' | 'opensearch' | 'sqlite-mem' | 'sqlite-disk'`)
+
+To only install dependencies:
 
 ```console
 make setup
@@ -123,6 +130,30 @@ If an error occurs during set up, consider tearing down the existing `FTS_ENGINE
 
 ```console
 FTS_ENGINE=pg make engine-stop
+```
+
+### Setup/Teardown of a single backing service
+
+To control the setup/teardown of a single backing service, use the `engine-start` and `engine-stop` top level targets.
+
+For example, if you wanted to start MeiliSearch and poke around on the instance:
+
+```console
+FTS_ENGINE=meilisearch make engine-start
+```
+
+After this command returns, you should have an instance of meilisearch running with a stable name (`fts-$(FTS_ENGINE)`):
+
+```
+$ docker ps
+CONTAINER ID   IMAGE                          COMMAND                  CREATED         STATUS         PORTS                                            NAMES
+4d7c0efdf5cf   getmeili/meilisearch:v0.28.1   "tini -- /bin/meilis…"   7 seconds ago   Up 6 seconds   127.0.0.1:7700->7700/tcp                         fts-meili
+```
+
+To stop the service:
+
+```console
+FTS_ENGINE=meilisearch make engine-stop
 ```
 
 ### Ingesting documents
