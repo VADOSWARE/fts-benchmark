@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.2.1] - 2022-10-15
+
+### Bug Fixes
+
+- Include tag in release automation
+- Remove debug comment
+
 ## [0.2.0] - 2022-10-15
 
 ### Bug Fixes
