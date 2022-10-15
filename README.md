@@ -19,12 +19,14 @@ To run the tests, please ensure you have the following installed on your machine
 - `gunzip` (part of the [`gzip` software distribution][gzip])
 - [Docker][docker]
 - [NodeJS][nodejs]
+- [`pnpm`][pnpm]
 - [`sqlite`][sqlite]
 
 [gzip]: https://www.gnu.org/software/gzip/
 [docker]: https://docs.docker.com
 [nodejs]: https://nodejs.org
 [sqlite]: https://sqlite.org
+[pnpm]: https://pnpm.io
 
 ## Quickstart
 

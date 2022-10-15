@@ -19,7 +19,7 @@ GIT ?= git
 NODE ?= node
 DOCKER ?= docker
 GUNZIP ?= gunzip
-NPM ?= npm
+PNPM ?= pnpm
 SQLITE ?= sqlite3
 
 ROOT_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
@@ -97,7 +97,7 @@ movies.ndjson.json: check-dep-gunzip movies.csv
 	fi
 
 setup:
-	$(NPM) install
+	$(PNPM) install
 
 run:
 	@$(MAKE) --quiet --no-print-directory engine-start || true
