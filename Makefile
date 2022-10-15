@@ -343,7 +343,7 @@ OPENSEARCH_CONTAINER_NAME ?= fts-opensearch
 OPENSEARCH_IMAGE ?= opensearchproject/opensearch:2.2.0@sha256:174ee3a36ded56043add6e9d9086c9c0e877c38b3161a9f89b5bfc8f83a24ab3
 OPENSEARCH_AUTH_PASSWORD ?= admin
 OPENSEARCH_AUTH_USERNAME ?= admin
-OPENSEARCH_PROTOCOL ?= https
+OPENSEARCH_PROTOCOL ?= http
 OPENSEARCH_HOST ?= localhost
 OPENSEARCH_PORT ?= 9200
 OPENSEARCH_PERF_PORT ?= 9600
@@ -359,6 +359,7 @@ engine-start-opensearch: .data opensearch-volume-create
 		-p $(OPENSEARCH_PORT):$(OPENSEARCH_PORT) \
 		-p $(OPENSEARCH_PERF_PORT):$(OPENSEARCH_PERF_PORT) \
 		-e "discovery.type=single-node" \
+		-e "plugins.security.disabled=true" \
 		-v $(OPENSEARCH_CONTAINER_NAME):/usr/share/opensearch/data \
 		$(OPENSEARCH_IMAGE)
 	@echo "[info] started docker container [$(OPENSEARCH_CONTAINER_NAME)]..."
