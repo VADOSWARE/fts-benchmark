@@ -1,4 +1,4 @@
-# Postgres FTS benchmark
+# Postgres Full Text Search ("FTS") benchmark
 
 This is a benchmark of Postgres FTS versus other solutions:
 
@@ -18,8 +18,8 @@ To run the tests, please ensure you have the following installed on your machine
 
 - `gunzip` (part of the [`gzip` software distribution][gzip])
 - [Docker][docker]
-- [NodeJS][nodejs]
-- [`pnpm`][pnpm]
+- [NodeJS][nodejs] (`node` and `npm`)
+- [`pnpm`][pnpm] (i.e. `npm install -g pnpm`)
 - [`sqlite`][sqlite]
 
 [gzip]: https://www.gnu.org/software/gzip/
@@ -34,6 +34,12 @@ To set up testing data and run the benchmark:
 
 ```console
 make
+```
+
+To install dependencies:
+
+```console
+make setup
 ```
 
 ## Dataset
