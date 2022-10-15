@@ -1,6 +1,6 @@
 {
   "name": "pg-fts-benchmark",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Full text search benchmark for Postgres and other F/OSS search engines",
   "engines": {
     "node": ">=17.4.0"

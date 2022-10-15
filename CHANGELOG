@@ -1,6 +1,23 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.2.0] - 2022-10-15
+
+### Bug Fixes
+
+- Add license
+- Incorrect env breaking csv2ndjson. (#1)
+- Disable opensearch security for local runs (#3)
+
+### Documentation
+
+- Improve ENV docs (#5)
+
+### Workflow
+
+- Swtich to pnpm (#4)
+- Add release automation
+
 ## [0.1.0] - 2022-08-29
 
 ### Bug Fixes
