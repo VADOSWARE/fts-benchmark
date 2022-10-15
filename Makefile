@@ -135,7 +135,7 @@ ingest-pg:
 ingest-meilisearch:
 	@OP=ingest \
 	INGEST_INPUT_PATH=$(DATA_MOVIES_NDJSON_PATH) \
-	MEILI_HOST=http://$(MEILI_HOST):$(MEILI_PORT) \
+	MEILI_URL=http://$(MEILI_HOST):$(MEILI_PORT) \
 	MEILI_API_KEY=$(MEILI_MASTER_KEY) \
 	$(NODE) "src/driver/index.mjs"
 
