@@ -115,6 +115,28 @@ run-all:
 	@$(MAKE) --quiet --no-print-directory run FTS_ENGINE=sqlite-disk
 	@$(MAKE) --quiet --no-print-directory run FTS_ENGINE=sqlite-mem
 
+######################
+# Release Automation #
+######################
+
+release-major:
+	$(PNPM) version major --no-git-tag-version
+	$(MAKE) -s --no-print-directory changelog
+	$(GIT) commit -am "release: v`$(NODE) -e 'console.log(require("./package.json").version);'`"
+	$(GIT) push
+
+release-minor:
+	$(PNPM) version minor --no-git-tag-version
+	$(MAKE) -s --no-print-directory changelog
+	$(GIT) commit -am "release: v`$(NODE) -e 'console.log(require("./package.json").version);'`"
+	$(GIT) push
+
+release-patch:
+	$(PNPM) version patch --no-git-tag-version
+	$(MAKE) -s --no-print-directory changelog
+	$(GIT) commit -am "release: v`$(NODE) -e 'console.log(require("./package.json").version);'`"
+	$(GIT) push
+
 #############
 # Ingestion #
 #############
