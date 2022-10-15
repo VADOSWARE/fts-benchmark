@@ -41,7 +41,7 @@ To run only a single benchmark (in this case, with Postgres FTS):
 ```console
 FTS_ENGINE=pg make setup run
 ```
-(`FTS_ENGINE = 'pg' | 'meilisearch' | 'typesense' | 'opensearch' | 'sqlite-mem' | 'sqlite-disk'`)
+(`FTS_ENGINE = 'pg' | 'meilisearch' | 'typesense' | 'opensearch' | 'sqlite-disk'`)
 
 To only install dependencies:
 

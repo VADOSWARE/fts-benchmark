@@ -206,12 +206,14 @@ endif
 
 query-pg:
 	@OP=query \
+	TIMING=true \
 	QUERY_INPUT_PATH=$(SEARCH_PHRASES_NDJSON_PATH) \
 	PG_URL=$(PG_URL) \
 	$(NODE) "src/driver/index.mjs"
 
 query-meilisearch:
 	@OP=query \
+	TIMING=true \
 	QUERY_INPUT_PATH=$(SEARCH_PHRASES_NDJSON_PATH) \
 	MEILI_HOST=http://$(MEILI_HOST):$(MEILI_PORT) \
 	MEILI_API_KEY=$(MEILI_MASTER_KEY) \
@@ -219,6 +221,7 @@ query-meilisearch:
 
 query-typesense:
 	@OP=query \
+	TIMING=true \
 	QUERY_INPUT_PATH=$(SEARCH_PHRASES_NDJSON_PATH) \
 	TYPESENSE_HOST=$(TYPESENSE_HOST) \
 	TYPESENSE_PORT=$(TYPESENSE_PORT) \
@@ -227,6 +230,7 @@ query-typesense:
 
 query-opensearch:
 	@OP=query \
+	TIMING=true \
 	QUERY_INPUT_PATH=$(SEARCH_PHRASES_NDJSON_PATH) \
 	OPENSEARCH_PROTOCOL=$(OPENSEARCH_PROTOCOL) \
 	OPENSEARCH_HOST=$(OPENSEARCH_HOST) \
@@ -237,6 +241,7 @@ query-opensearch:
 
 query-sqlite-disk:
 	@OP=query \
+	TIMING=true \
 	QUERY_INPUT_PATH=$(SEARCH_PHRASES_NDJSON_PATH) \
 	SQLITE_DISK_DB_PATH=$(SQLITE_DISK_DB_PATH) \
 	$(NODE) "src/driver/index.mjs"
