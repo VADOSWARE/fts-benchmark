@@ -1,5 +1,6 @@
 .PHONY: all .data \
 				clean clean-data \
+				print-version \
 # Check deps
 				check-dep-nodejs check-dep-docker check-dep-gunzip check-env-FTS_ENGINE \
 # Run a single experiment
@@ -50,6 +51,9 @@ CHANGELOG_FILE_PATH ?= CHANGELOG
 
 changelog:
 	$(GIT) cliff --unreleased --tag=$(VERSION) --prepend=$(CHANGELOG_FILE_PATH)
+
+print-version:
+	echo -n $(VERSION)
 
 ###########
 # Tooling #
@@ -122,20 +126,23 @@ run-all:
 release-major:
 	$(PNPM) version major --no-git-tag-version
 	$(MAKE) -s --no-print-directory changelog
-	$(GIT) commit -am "release: v`$(NODE) -e 'console.log(require("./package.json").version);'`"
-	$(GIT) push
+	$(GIT) commit -am "release: v`$(MAKE) -s --no-print-directory print-version`"
+	$(GIT) tag "v`$(MAKE) -s --no-print-directory print-version`"
+	$(GIT) push --all
 
 release-minor:
 	$(PNPM) version minor --no-git-tag-version
 	$(MAKE) -s --no-print-directory changelog
-	$(GIT) commit -am "release: v`$(NODE) -e 'console.log(require("./package.json").version);'`"
-	$(GIT) push
+	$(GIT) commit -am "release: v`$(MAKE) -s --no-print-directory print-version`"
+	$(GIT) tag "v`$(MAKE) -s --no-print-directory print-version`"
+#	$(GIT) push --all
 
 release-patch:
 	$(PNPM) version patch --no-git-tag-version
 	$(MAKE) -s --no-print-directory changelog
-	$(GIT) commit -am "release: v`$(NODE) -e 'console.log(require("./package.json").version);'`"
-	$(GIT) push
+	$(GIT) commit -am "release: v`$(MAKE) -s --no-print-directory print-version`"
+	$(GIT) tag "v`$(MAKE) -s --no-print-directory print-version`"
+	$(GIT) push --all
 
 #############
 # Ingestion #
