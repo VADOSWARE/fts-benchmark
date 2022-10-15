@@ -40,9 +40,9 @@ export async function build() {
     async ingest({ document }) {
       try {
         // Ignore rows without proper release dates
-        if (document.release_date.trim().length === 0) {
+        if (!document.release_date || document.release_date?.trim().length === 0) {
           if (process.env.DEBUG) {
-            process.stderr.write(`[error] invalid release date for doc: [${document.id}]`);
+            process.stderr.write(`[error] invalid release date for doc: [${document.id}] (title? "${document.title}"`);
           }
           return;
         }

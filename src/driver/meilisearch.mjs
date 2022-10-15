@@ -7,10 +7,10 @@ const LARGE_LIMIT = 100_000;
 
 async function connectMeilisearch() {
   // Create MeiliSearch Host
-  if (!process.env.MEILI_HOST) {
-    throw new Error(`[error] Missing/invalid MeiliSearch URL [${process.env.MEILI_HOST}] (did you specify MEILI_HOST?)`);
+  if (!process.env.MEILI_URL) {
+    throw new Error(`[error] Missing/invalid MeiliSearch URL [${process.env.MEILI_URL}] (did you specify MEILI_URL?)`);
   }
-  const host = process.env.MEILI_HOST;
+  const url = process.env.MEILI_URL;
 
   // Create MeiliSearch API Key
   if (!process.env.MEILI_API_KEY) {
@@ -19,7 +19,7 @@ async function connectMeilisearch() {
   const apiKey = process.env.MEILI_API_KEY;
 
   // Create MeiliSearch client
-  const client = new MeiliSearch({ host, apiKey });
+  const client = new MeiliSearch({ host: url, apiKey });
 
   if (process.env.FTS_ENGINE_RESET_AT_INIT) {
     let deleteIndexResult = await client.index.deleteIndex();

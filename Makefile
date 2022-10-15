@@ -17,10 +17,12 @@
 
 GIT ?= git
 NODE ?= node
-DOCKER ?= docker
 GUNZIP ?= gunzip
 PNPM ?= pnpm
 SQLITE ?= sqlite3
+
+DOCKER ?= docker
+DOCKER_LISTEN_HOST ?= 127.0.0.1
 
 ROOT_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 VERSION ?= $(shell $(NODE) -e 'console.log(require("./package.json").version);')
@@ -33,7 +35,7 @@ SEARCH_PHRASES_NDJSON_PATH ?= $(ROOT_DIR)search-phrases.ndjson.json
 
 SQLITE_DISK_DB_PATH ?= ./fts-sqlite-disk-db.sqlite
 
-all: setup run
+all: setup run-all
 
 .data:
 	@mkdir -p .data
@@ -105,6 +107,14 @@ run:
 	@$(MAKE) --quiet --no-print-directory query
 	@$(MAKE) --quiet --no-print-directory engine-stop
 
+run-all:
+	@$(MAKE) --quiet --no-print-directory run FTS_ENGINE=pg
+	@$(MAKE) --quiet --no-print-directory run FTS_ENGINE=meilisearch
+	@$(MAKE) --quiet --no-print-directory run FTS_ENGINE=typesense
+	@$(MAKE) --quiet --no-print-directory run FTS_ENGINE=opensearch
+	@$(MAKE) --quiet --no-print-directory run FTS_ENGINE=sqlite-disk
+	@$(MAKE) --quiet --no-print-directory run FTS_ENGINE=sqlite-mem
+
 #############
 # Ingestion #
 #############
@@ -135,7 +145,7 @@ ingest-pg:
 ingest-meilisearch:
 	@OP=ingest \
 	INGEST_INPUT_PATH=$(DATA_MOVIES_NDJSON_PATH) \
-	MEILI_HOST=http://$(MEILI_HOST):$(MEILI_PORT) \
+	MEILI_URL=http://$(MEILI_HOST):$(MEILI_PORT) \
 	MEILI_API_KEY=$(MEILI_MASTER_KEY) \
 	$(NODE) "src/driver/index.mjs"
 
@@ -196,19 +206,22 @@ endif
 
 query-pg:
 	@OP=query \
+	TIMING=true \
 	QUERY_INPUT_PATH=$(SEARCH_PHRASES_NDJSON_PATH) \
 	PG_URL=$(PG_URL) \
 	$(NODE) "src/driver/index.mjs"
 
 query-meilisearch:
 	@OP=query \
+	TIMING=true \
 	QUERY_INPUT_PATH=$(SEARCH_PHRASES_NDJSON_PATH) \
-	MEILI_HOST=http://$(MEILI_HOST):$(MEILI_PORT) \
+	MEILI_URL=http://$(MEILI_HOST):$(MEILI_PORT) \
 	MEILI_API_KEY=$(MEILI_MASTER_KEY) \
 	$(NODE) "src/driver/index.mjs"
 
 query-typesense:
 	@OP=query \
+	TIMING=true \
 	QUERY_INPUT_PATH=$(SEARCH_PHRASES_NDJSON_PATH) \
 	TYPESENSE_HOST=$(TYPESENSE_HOST) \
 	TYPESENSE_PORT=$(TYPESENSE_PORT) \
@@ -217,6 +230,7 @@ query-typesense:
 
 query-opensearch:
 	@OP=query \
+	TIMING=true \
 	QUERY_INPUT_PATH=$(SEARCH_PHRASES_NDJSON_PATH) \
 	OPENSEARCH_PROTOCOL=$(OPENSEARCH_PROTOCOL) \
 	OPENSEARCH_HOST=$(OPENSEARCH_HOST) \
@@ -227,6 +241,7 @@ query-opensearch:
 
 query-sqlite-disk:
 	@OP=query \
+	TIMING=true \
 	QUERY_INPUT_PATH=$(SEARCH_PHRASES_NDJSON_PATH) \
 	SQLITE_DISK_DB_PATH=$(SQLITE_DISK_DB_PATH) \
 	$(NODE) "src/driver/index.mjs"
@@ -275,7 +290,7 @@ engine-start-pg:
 	@$(DOCKER) run \
 		--rm \
 		--detach \
-		-p 5432:5432 \
+		-p $(DOCKER_LISTEN_HOST):$(PG_PORT):$(PG_PORT) \
 		-e POSTGRES_USER=$(PG_USER) \
 		-e POSTGRES_PASSWORD=$(PG_PASSWORD) \
 		-v $(PWD)/.data/postgres:/var/lib/postgresql/data \
@@ -300,7 +315,7 @@ MEILI_HOST ?= localhost
 engine-start-meilisearch:
 	$(DOCKER) run --rm \
 		--detach \
-		-p $(MEILI_PORT):$(MEILI_PORT) \
+		-p $(DOCKER_LISTEN_HOST):$(MEILI_PORT):$(MEILI_PORT) \
 		-e MEILI_MASTER_KEY=$(MEILI_MASTER_KEY) \
 		--name=$(MEILI_CONTAINER_NAME) \
 		-v $(PWD)/.data/meilisearch:/meili_data \
@@ -324,7 +339,7 @@ TYPESENSE_HOST ?= localhost
 engine-start-typesense:
 	@$(DOCKER) run --rm \
 		--detach \
-		-p $(TYPESENSE_PORT):$(TYPESENSE_PORT) \
+		-p $(DOCKER_LISTEN_HOST):$(TYPESENSE_PORT):$(TYPESENSE_PORT) \
 		--name=$(TYPESENSE_CONTAINER_NAME) \
 		-v $(PWD)/.data/typesense:/data \
 		$(TYPESENSE_IMAGE) \
@@ -356,8 +371,8 @@ engine-start-opensearch: .data opensearch-volume-create
 		--detach \
 		--rm \
 		--name=$(OPENSEARCH_CONTAINER_NAME) \
-		-p $(OPENSEARCH_PORT):$(OPENSEARCH_PORT) \
-		-p $(OPENSEARCH_PERF_PORT):$(OPENSEARCH_PERF_PORT) \
+		-p $(DOCKER_LISTEN_HOST):$(OPENSEARCH_PORT):$(OPENSEARCH_PORT) \
+		-p $(DOCKER_LISTEN_HOST):$(OPENSEARCH_PERF_PORT):$(OPENSEARCH_PERF_PORT) \
 		-e "discovery.type=single-node" \
 		-e "plugins.security.disabled=true" \
 		-v $(OPENSEARCH_CONTAINER_NAME):/usr/share/opensearch/data \

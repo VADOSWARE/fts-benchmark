@@ -26,7 +26,7 @@ async function executeIngest({ driver, inputPath }) {
       process.stderr.write(`failed to parse line as JSON: [${line}]\n`);
     }
 
-    await driver.ingest({ 
+    await driver.ingest({
       document: obj,
     });
     processed++;
@@ -52,7 +52,7 @@ async function executeQuery({ driver, inputPath }) {
   let elapsed;
   let ids;
 
-  process.stderr.write(`[info] ingesting lines in [${inputPath}]...\n`);
+  process.stderr.write(`[info] ingesting and running search phrases in [${inputPath}]...\n`);
   for await (const line of lines) {
     // Parse incoming line as JSON
     let obj;
@@ -62,52 +62,57 @@ async function executeQuery({ driver, inputPath }) {
       process.stderr.write(`failed to parse line as JSON: [${line}]\n`);
     }
 
-      if (process.env.TIMING) { before = process.hrtime(); }
+    if (process.env.TIMING) { before = process.hrtime(); }
 
-      const { ids } = await driver.query({ phrase: obj });
+    const { ids } = await driver.query({ phrase: obj });
 
-      if (process.env.TIMING) {
-        elapsed = process.hrtime(before)[1] / 1_000_000;
-        if (process.env.TIMING_FORMAT === "md-table") {
-          process.stderr.write(`| \`${process.env.FTS_ENGINE}\` | "${obj}" | \`${ids.length}\` | \`${elapsed.toPrecision(3)}\` | \`${(elapsed / ids.length * 1.0).toPrecision(3)}\` |\n`);
-        } else {
-          process.stderr.write(`[timing] phrase [${obj}]: returned [${ids.length}] results in ${elapsed}.ms\n`);
-        }
+    if (process.env.TIMING) {
+      elapsed = process.hrtime(before)[1] / 1_000_000;
+      if (process.env.TIMING_FORMAT === "md-table") {
+        process.stderr.write(`| \`${process.env.FTS_ENGINE}\` | "${obj}" | \`${ids.length}\` | \`${elapsed.toPrecision(3)}\` | \`${(elapsed / ids.length * 1.0).toPrecision(3)}\` |\n`);
+      } else {
+        process.stderr.write(`[timing] phrase ["${obj}"]: returned [${ids.length}] results in ${elapsed}.ms\n`);
       }
+    }
 
-    await driver.ingest({ document: obj });
     processed++;
   }
 
   if (process.env.DEBUG && processed % 1000 === 0) {
     process.stderr.write(`[info] successfully queried [${processed}] lines\n`);
   }
+
+  if (!process.env.TIMING) {
+    process.stderr.write(`[info] set TIMING=true to see timing data for each query!\n`);
+  }
+
+  process.stderr.write(`[info] finished running search queries\n`);
 }
 
 // Ingest ndjson into a given search engine driver
 export async function execute({ op, driver, ingestInputPath, queryInputPath }) {
-    // Handle the intended operation
-    switch (op) {
-      // Ingestion
-    case "ingest":
-      await executeIngest({ driver, inputPath: ingestInputPath });
-      break;
+  // Handle the intended operation
+  switch (op) {
+    // Ingestion
+  case "ingest":
+    await executeIngest({ driver, inputPath: ingestInputPath });
+    break;
 
-      // Querying
-    case "query":
-      await executeQuery({ driver, inputPath: queryInputPath });
-      break;
+    // Querying
+  case "query":
+    await executeQuery({ driver, inputPath: queryInputPath });
+    break;
 
-      // Ingestion
-    case "ingest+query":
-      await executeIngest({ driver, inputPath: ingestInputPath });
-      await executeQuery({ driver, inputPath: queryInputPath });
-      break;
+    // Ingestion
+  case "ingest+query":
+    await executeIngest({ driver, inputPath: ingestInputPath });
+    await executeQuery({ driver, inputPath: queryInputPath });
+    break;
 
-      // Unknown operation
-    default:
-      throw new Error(`Missing/invalid operation [${op}]`);
-    }
+    // Unknown operation
+  default:
+    throw new Error(`Missing/invalid operation [${op}]`);
+  }
 }
 
 // Initialize the driver set by FTS_ENGINE
